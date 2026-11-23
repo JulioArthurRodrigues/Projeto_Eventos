@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Login</h2>
+
+  <form #loginForm="ngForm" (ngSubmit)="entrar()">
+    <div class="campo">
+      <label>E-mail:</label>
+      <input type="email" name="email" [(ngModel)]="email" required />
+    </div>
+
+    <div class="campo">
+      <label>Senha:</label>
+      <input type="password" name="senha" [(ngModel)]="senha" required />
+    </div>
+
+    @if (erro()) {
+      <p class="erro">{{ erro() }}</p>
+    }
+
+    <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+  </form>
+</div>
+

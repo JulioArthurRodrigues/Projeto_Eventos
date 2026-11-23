@@ -1,0 +1,116 @@
+.container {
+  max-width: 1050px;
+  margin: 40px auto;
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.busca-container {
+  margin-bottom: 20px;
+}
+
+.campo-busca {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo-busca:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+h2 {
+  color: #1e293b;
+  font-size: 22px;
+}
+
+.topo div {
+  display: flex;
+  gap: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 14px;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+
+/* Botão Novo Evento (primeiro botão do topo) */
+.topo button:first-child {
+  background-color: #2563eb;
+  color: white;
+}
+
+.topo button:first-child:hover {
+  background-color: #1d4ed8;
+}
+
+/* Botão Editar na tabela */
+td button:first-child {
+  background-color: #e2e8f0;
+  color: #1e293b;
+  margin-right: 6px;
+}
+
+td button:first-child:hover {
+  background-color: #cbd5e1;
+}
+
+/* Botões Sair e Excluir */
+.btn-sair, .btn-excluir {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-sair:hover, .btn-excluir:hover {
+  background-color: #dc2626;
+}
