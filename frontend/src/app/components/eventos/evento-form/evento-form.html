@@ -1,98 +1,119 @@
-<div class="container">
-  <div class="cabecalho">
-    <h2>{{ idEdicao ? 'Editar Evento' : 'Novo Evento' }}</h2>
-    <p class="subtitulo">
-      {{ idEdicao ? 'Atualize as informações do evento abaixo' : 'Preencha os dados para cadastrar um novo evento' }}
-    </p>
+<div class="pagina-form">
+  <nav class="navbar">
+    <div class="navbar-conteudo">
+      <div class="marca">
+        <img src="/icon.png" alt="Logo Portal de Eventos" class="marca-logo" />
+        <span class="marca-nome">Portal de Eventos</span>
+      </div>
+
+      <div class="usuario-area">
+        <span class="usuario-badge">Administrador</span>
+        <button type="button" class="btn-sair-nav" (click)="sair()">Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="banner-fundo">
+    <div class="banner-grade"></div>
+    <div class="banner-brilho"></div>
   </div>
 
-  <form #eventoForm="ngForm" (ngSubmit)="salvar()">
-    <div class="grid-form">
-      <div class="campo span-2">
-        <label for="titulo">Título *</label>
-        <input
-          id="titulo"
-          type="text"
-          name="titulo"
-          placeholder="Ex: Workshop de Angular"
-          [(ngModel)]="evento().titulo"
-          required
-        />
+  <div class="container">
+    <div class="cabecalho">
+      <div class="cabecalho-barra">
+        <span class="tag-contexto">
+          <span class="ponto-ativo"></span>
+          {{ idEdicao ? 'Modo de Edição' : 'Novo Cadastro' }}
+        </span>
+
+        <button type="button" class="btn-voltar-topo" (click)="voltar()">
+          ← Voltar para lista
+        </button>
       </div>
 
-      <div class="campo span-2">
-        <label for="descricao">Descrição</label>
-        <textarea
-          id="descricao"
-          name="descricao"
-          rows="3"
-          placeholder="Breve resumo sobre o evento..."
-          [(ngModel)]="evento().descricao"
-        ></textarea>
-      </div>
-
-      <div class="campo">
-        <label for="data">Data *</label>
-        <input
-          id="data"
-          type="date"
-          name="data"
-          [(ngModel)]="evento().data"
-          required
-        />
-      </div>
-
-      <div class="campo">
-        <label for="local">Local *</label>
-        <input
-          id="local"
-          type="text"
-          name="local"
-          placeholder="Ex: Auditório Principal"
-          [(ngModel)]="evento().local"
-          required
-        />
-      </div>
-
-      <div class="campo">
-        <label for="organizador">Organizador</label>
-        <input
-          id="organizador"
-          type="text"
-          name="organizador"
-          placeholder="Nome do responsável"
-          [(ngModel)]="evento().organizador"
-        />
-      </div>
-
-      <div class="campo">
-        <label for="capacidade">Capacidade</label>
-        <input
-          id="capacidade"
-          type="number"
-          name="capacidade"
-          placeholder="Ex: 100"
-          [(ngModel)]="evento().capacidade"
-        />
-      </div>
-
-      <div class="campo span-2">
-        <label for="categoria">Categoria</label>
-        <input
-          id="categoria"
-          type="text"
-          name="categoria"
-          placeholder="Ex: Tecnologia, Negócios, Workshop"
-          [(ngModel)]="evento().categoria"
-        />
+      <div class="cabecalho-titulo-grupo">
+        <h2>{{ idEdicao ? 'Editar Evento' : 'Novo Evento' }}</h2>
+        <p class="subtitulo">
+          {{ idEdicao ? 'Atualize os dados do evento selecionado' : 'Preencha os dados para cadastrar um novo evento' }}
+        </p>
       </div>
     </div>
 
-    <div class="acoes">
-      <button type="button" class="btn-cancelar" (click)="voltar()">Cancelar</button>
-      <button type="submit" class="btn-salvar" [disabled]="eventoForm.invalid">
-        {{ idEdicao ? 'Atualizar Evento' : 'Salvar Evento' }}
-      </button>
-    </div>
-  </form>
+    <form (ngSubmit)="salvar()" #formEvento="ngForm" novalidate>
+      <div class="bloco-secao">
+        <div class="secao-rotulo">
+          <span class="secao-indice">01</span>
+          <span>Informações Principais</span>
+        </div>
+
+        <div class="grid-form">
+          <div class="campo span-2">
+            <label for="titulo">Título <span class="obrigatorio">*</span></label>
+            <input id="titulo" name="titulo" type="text" placeholder="Ex: Workshop de Angular"
+              [ngModel]="evento().titulo" (ngModelChange)="atualizarCampo('titulo', $event)" required />
+            <span class="dica-campo">Escolha um nome claro e fácil de identificar na listagem.</span>
+          </div>
+
+          <div class="campo span-2">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao"
+              placeholder="Breve resumo sobre o evento, programação ou público-alvo..." [ngModel]="evento().descricao"
+              (ngModelChange)="atualizarCampo('descricao', $event)"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="bloco-secao espaco-topo">
+        <div class="secao-rotulo">
+          <span class="secao-indice">02</span>
+          <span>Data, Local e Detalhes</span>
+        </div>
+
+        <div class="grid-form">
+          <div class="campo">
+            <label for="data">Data <span class="obrigatorio">*</span></label>
+            <input id="data" name="data" type="date" [ngModel]="evento().data"
+              (ngModelChange)="atualizarCampo('data', $event)" required />
+          </div>
+
+          <div class="campo">
+            <label for="local">Local <span class="obrigatorio">*</span></label>
+            <input id="local" name="local" type="text" placeholder="Ex: Auditório Principal" [ngModel]="evento().local"
+              (ngModelChange)="atualizarCampo('local', $event)" required />
+          </div>
+
+          <div class="campo">
+            <label for="organizador">Organizador</label>
+            <input id="organizador" name="organizador" type="text" placeholder="Nome do responsável"
+              [ngModel]="evento().organizador" (ngModelChange)="atualizarCampo('organizador', $event)" />
+          </div>
+
+          <div class="campo">
+            <label for="capacidade">Capacidade</label>
+            <input id="capacidade" name="capacidade" type="number" min="0" placeholder="0"
+              [ngModel]="evento().capacidade" (ngModelChange)="atualizarCampo('capacidade', $event)" />
+          </div>
+
+          <div class="campo span-2">
+            <label for="categoria">Categoria</label>
+            <input id="categoria" name="categoria" type="text" placeholder="Ex: Tecnologia, Negócios, Workshop"
+              [ngModel]="evento().categoria" (ngModelChange)="atualizarCampo('categoria', $event)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <span class="nota-obrigatorio">
+          Campos marcados com <strong class="obrigatorio">*</strong> são obrigatórios
+        </span>
+
+        <div class="acoes-botoes">
+          <button type="button" class="btn-cancelar" (click)="voltar()">Cancelar</button>
+          <button type="submit" class="btn-salvar" [disabled]="formEvento.invalid || salvando()">
+            {{ salvando() ? 'Salvando...' : (idEdicao ? 'Salvar Alterações' : 'Salvar Evento') }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

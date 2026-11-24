@@ -16,7 +16,7 @@ describe('EventoForm', () => {
   };
   let routerMock: { navigate: ReturnType<typeof vi.fn> };
 
-  it('deve criar um novo evento quando não houver :id na rota', async () => {
+  it('deve criar um novo evento quando nÃ£o houver :id na rota', async () => {
     eventoServiceMock = {
       buscar: vi.fn(),
       criar: vi.fn(),

@@ -18,6 +18,7 @@ export class EventoForm implements OnInit {
 
   evento = signal<Evento>(new Evento());
   idEdicao: number | null = null;
+  salvando = signal(false);
 
   ngOnInit() {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -30,19 +31,38 @@ export class EventoForm implements OnInit {
     }
   }
 
+  atualizarCampo<K extends keyof Evento>(campo: K, valor: Evento[K]) {
+    this.evento.update((atual) => ({
+      ...atual,
+      [campo]: valor
+    }));
+  }
+
   salvar() {
-    if (this.idEdicao) {
-      this.eventoService.atualizar(this.idEdicao, this.evento()).subscribe(() => {
+    if (this.salvando()) return;
+    this.salvando.set(true);
+
+    const request$ = this.idEdicao
+      ? this.eventoService.atualizar(this.idEdicao, this.evento())
+      : this.eventoService.criar(this.evento());
+
+    request$.subscribe({
+      next: () => {
+        this.salvando.set(false);
         this.voltar();
-      });
-    } else {
-      this.eventoService.criar(this.evento()).subscribe(() => {
-        this.voltar();
-      });
-    }
+      },
+      error: () => {
+        this.salvando.set(false);
+      }
+    });
   }
 
   voltar() {
     this.router.navigate(['/eventos']);
+  }
+
+  sair() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

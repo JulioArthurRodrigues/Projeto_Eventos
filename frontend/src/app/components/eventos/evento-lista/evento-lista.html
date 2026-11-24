@@ -1,3 +1,16 @@
+<nav class="navbar">
+  <div class="navbar-conteudo">
+    <div class="marca">
+      <img src="/icon.png" alt="Logo Portal de Eventos" class="marca-logo" />
+      <span class="marca-nome">Portal de Eventos</span>
+    </div>
+    <div class="usuario-area">
+      <span class="usuario-badge">Administrador</span>
+      <button type="button" class="btn-sair-nav" (click)="sair()">Sair</button>
+    </div>
+  </div>
+</nav>
+<div class="banner-fundo"></div>
 <div class="container">
   <div class="topo">
     <div>
@@ -5,21 +18,31 @@
       <p class="subtitulo">Gerencie os eventos cadastrados no sistema</p>
     </div>
     <div class="topo-acoes">
-      <button class="btn-novo" (click)="novoEvento()">Novo evento</button>
-      <button class="btn-sair" (click)="sair()">Sair</button>
+      <button type="button" class="btn-novo" (click)="novoEvento()">Novo evento</button>
+    </div>
+  </div>
+
+  <div class="resumo-grid">
+    <div class="resumo-card">
+      <span class="resumo-label">Eventos Cadastrados</span>
+      <strong class="resumo-valor">{{ eventos().length }}</strong>
+    </div>
+    <div class="resumo-card">
+      <span class="resumo-label">Status do Sistema</span>
+      <strong class="resumo-valor destaque-verde">Ativo</strong>
+    </div>
+    <div class="resumo-card">
+      <span class="resumo-label">Próximo Evento</span>
+      <strong class="resumo-valor">
+        {{ eventos()[0]?.data ? (eventos()[0].data | date:'dd/MM/yyyy':'UTC') : '—' }}
+      </strong>
     </div>
   </div>
 
   <div class="busca-container">
-    <input
-      type="text"
-      placeholder="Buscar por título, local ou categoria..."
-      [ngModel]="termoBusca()"
-      (ngModelChange)="termoBusca.set($event)"
-      class="campo-busca"
-    />
+    <input type="text" placeholder="Buscar por título, local ou categoria..." [ngModel]="termoBusca()"
+      (ngModelChange)="termoBusca.set($event)" class="campo-busca" />
   </div>
-
   <div class="tabela-wrapper">
     <table>
       <thead>
@@ -36,25 +59,25 @@
       </thead>
       <tbody>
         @for (evento of eventosFiltrados(); track evento.id) {
-          <tr>
-            <td class="td-titulo" data-label="Título">{{ evento.titulo }}</td>
-            <td class="td-descricao" data-label="Descrição">{{ evento.descricao }}</td>
-            <td class="td-nowrap" data-label="Data">{{ evento.data | date:'dd/MM/yyyy':'UTC' }}</td>
-            <td class="td-nowrap" data-label="Local">{{ evento.local }}</td>
-            <td data-label="Organizador">{{ evento.organizador }}</td>
-            <td class="td-capacidade" data-label="Capacidade">{{ evento.capacidade }} vagas</td>
-            <td data-label="Categoria"><span class="badge">{{ evento.categoria }}</span></td>
-            <td class="td-acoes">
-              <div class="acoes-grupo">
-                <button class="btn-editar" (click)="editar(evento.id)">Editar</button>
-                <button class="btn-excluir" (click)="excluir(evento.id)">Excluir</button>
-              </div>
-            </td>
-          </tr>
+        <tr>
+          <td class="td-titulo" data-label="Título">{{ evento.titulo }}</td>
+          <td class="td-descricao" data-label="Descrição">{{ evento.descricao }}</td>
+          <td class="td-nowrap" data-label="Data">{{ evento.data | date:'dd/MM/yyyy':'UTC' }}</td>
+          <td class="td-nowrap" data-label="Local">{{ evento.local }}</td>
+          <td data-label="Organizador">{{ evento.organizador }}</td>
+          <td class="td-capacidade" data-label="Capacidade">{{ evento.capacidade }} vagas</td>
+          <td data-label="Categoria"><span class="badge">{{ evento.categoria }}</span></td>
+          <td class="td-acoes">
+            <div class="acoes-grupo">
+              <button type="button" class="btn-editar" (click)="editar(evento.id)">Editar</button>
+              <button type="button" class="btn-excluir" (click)="excluir(evento.id)">Excluir</button>
+            </div>
+          </td>
+        </tr>
         } @empty {
-          <tr>
-            <td colspan="8" class="vazio">Nenhum evento encontrado.</td>
-          </tr>
+        <tr>
+          <td colspan="8" class="vazio">Nenhum evento encontrado.</td>
+        </tr>
         }
       </tbody>
     </table>

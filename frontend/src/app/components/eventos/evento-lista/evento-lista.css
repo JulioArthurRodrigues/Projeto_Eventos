@@ -1,16 +1,112 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #f1f5f9;
+  background-image: radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 45%);
+}
+
+.navbar {
+  background-color: #0f172a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-conteudo {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.marca-logo {
+  height: 32px !important;
+  width: auto !important;
+  max-height: 32px !important;
+  max-width: 48px !important;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.marca-icone {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.marca-nome {
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+.usuario-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.usuario-badge {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-sair-nav {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-sair-nav:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+.banner-fundo {
+  height: 140px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #1d4ed8 100%);
+}
+
 .container {
   max-width: 1200px;
-  margin: 40px auto;
+  margin: -90px auto 40px auto;
   padding: 32px;
   background-color: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12), 0 4px 12px -4px rgba(15, 23, 42, 0.04);
+  box-sizing: border-box;
 }
 
 .topo {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid #e2e8f0;
@@ -20,17 +116,54 @@ h2 {
   color: #0f172a;
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin: 0 0 4px 0;
 }
 
 .subtitulo {
   color: #64748b;
   font-size: 14px;
+  margin: 0;
 }
 
 .topo-acoes {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+}
+
+.resumo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.resumo-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resumo-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+}
+
+.resumo-valor {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.destaque-verde {
+  color: #16a34a;
 }
 
 .busca-container {
@@ -39,9 +172,10 @@ h2 {
 
 .campo-busca {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px 16px;
   background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #cbd5e1;
   border-radius: 10px;
   font-size: 14px;
   color: #1e293b;
@@ -52,7 +186,7 @@ h2 {
   outline: none;
   background-color: #ffffff;
   border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
 .tabela-wrapper {
@@ -76,10 +210,11 @@ th {
   padding: 14px 16px;
   text-align: left;
   border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
 }
 
 .col-acoes {
-  text-align: center;
+  text-align: right;
 }
 
 td {
@@ -148,33 +283,37 @@ button {
   background-color: #2563eb;
   color: #ffffff;
   padding: 10px 18px;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
 }
 
 .btn-novo:hover {
   background-color: #1d4ed8;
   transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 
 .btn-sair {
-  background-color: #fee2e2;
+  background-color: transparent;
   color: #dc2626;
-  padding: 10px 16px;
+  border: 1px solid #fecaca;
+  padding: 9px 16px;
 }
 
 .btn-sair:hover {
-  background-color: #fecaca;
+  background-color: #fef2f2;
+  border-color: #f87171;
 }
 
 .acoes-grupo {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 8px;
 }
 
 .btn-editar {
-  background-color: #f1f5f9;
+  background-color: #f8fafc;
   color: #334155;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #cbd5e1;
 }
 
 .btn-editar:hover {
@@ -185,7 +324,7 @@ button {
 .btn-excluir {
   background-color: #fef2f2;
   color: #dc2626;
-  border: 1px solid #fee2e2;
+  border: 1px solid #fecaca;
 }
 
 .btn-excluir:hover {
@@ -198,4 +337,15 @@ button {
   text-align: center;
   padding: 32px;
   color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .resumo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    margin: -70px 12px 24px 12px;
+    padding: 20px;
+  }
 }
